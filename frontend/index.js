@@ -23,6 +23,14 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
       }
    }
   }
+  
+  function getName(learner){
+    return learner.fullName
+  }
+
+  function getID(learner){
+    return learner.id
+  }
 
     try{
           let buildCards = ((info) =>{
@@ -33,7 +41,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
               let learnerMentors = document.createElement('h4')
               let mentorList = document.createElement('ul')
 
-              learnerName.textContent = `${info.fullName}`  //Create text content
+              learnerName.textContent = getName(info)  //Create text content
               learnerEmail.textContent = `${info.email}`
               learnerMentors.classList = 'closed'
               learnerMentors.textContent = `Mentors`
@@ -43,10 +51,12 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
                 mentorList.appendChild(li)
               })
               
-      
+              
               card.appendChild(learnerName)             //Append to card
               card.appendChild(learnerEmail)
               card.appendChild(learnerMentors)
+              card.appendChild(mentorList)
+
 
               card.addEventListener('click', (evt) => {  //card event listener
                 
@@ -65,18 +75,18 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
                     if(thisCard.classList.contains('selected') && thisCard !== card){
                       thisCard.classList.remove('selected')  
                     }
-                    console.log(thisCard.children[0].textContent)
+                    //console.log(thisCard.children[0].textContent)
                     
                     
                   })
                     if(card.classList.contains('selected') && evt.target !== card.children[2]){
-                      card.children[0].textContent = `${info.fullName}`
+                      card.children[0].textContent = getName(info)
                       card.classList.remove('selected')
                       document.querySelector('.info').textContent = `No learner is selected`
                     
                     }else{
                       card.classList.add('selected')
-                      document.querySelector('.selected').children[0].textContent =  `${info.fullName}, ID ${info.id}`
+                      document.querySelector('.selected').children[0].textContent =  `${getName(info)}, ID ${getID(info)}`
                       document.querySelector('.info').textContent = `The selected learner is ${info.fullName}`
                       
                     }
